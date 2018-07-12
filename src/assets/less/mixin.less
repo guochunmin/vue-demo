@@ -19,48 +19,17 @@
 @danger: #dc3545;
 @light: #f8f9fa;
 @dark: #343a40;
-@color:#1199F0;
+@color:#BC2A87;
+@bg-color:#F6F6F6;
 @font-color:#7E7E7E;
-.border(){
-    border:1px solid #ddd;
-}
+@font-hover:#FDD188;
+@small-color:#AEAEAE;
 /*
- * 移动端底部1pxborder实现方式
+ * 移动端1px border border实现方式
+ * @dir border方向：around上下左右 ；left 左 ；right 右；top 上； bottom 下；默认around
+ * @color border颜色 :默认#ddd
  */
-.border-1px-bottom(@color){
-    position: relative;
-    &:after{
-        display: block;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        border-top: 1px solid @color;
-        content: ' ';    
-    }
-    @media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5){
-        &:after{
-           -webkit-transform: scaleY(0.7);
-           transform: scaleY(0.7);
-        }
-    }
-    @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2){
-        &:after{
-           -webkit-transform: scaleY(0.5);
-           transform: scaleY(0.5);
-        }      
-    }
-    @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
-        &:after{
-           -webkit-transform: scaleY(0.33);
-           transform: scaleY(0.33);
-        }      
-    }
-}
-/*
- * 移动端1pxborder实现方式
- */
-.border-1px(@color){
+.border-1px(@dir:around,@bcolor:#ddd) when (@dir=around),(@dir=null){
     position: relative;
     margin-bottom: 20px;
     border:none;
@@ -69,7 +38,7 @@
         position: absolute;
         top: 0;
         left: 0;
-        border: 1px solid @color;
+        border: 1px solid @bcolor;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         width: 200%;
@@ -93,6 +62,66 @@
         &:after{
           -webkit-transform: scale(0.33);
           transform: scale(0.33);
+        }      
+    }  
+}
+.border-1px(@dir:around,@bcolor:#ddd) when (@dir=top) , (@dir=bottom){
+    position: relative;
+    &:after{
+        display: block;
+        position: absolute;
+        left: 0;
+        right:0;
+        @{dir}: 0;
+        border-@{dir}: 1px solid @bcolor;
+        content: ' ';    
+    }
+    @media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5){
+        &:after{
+           -webkit-transform: scaleY(0.7);
+           transform: scaleY(0.7);
+        }
+    }
+    @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2){
+        &:after{
+           -webkit-transform: scaleY(0.5);
+           transform: scaleY(0.5);
+        }      
+    }
+    @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
+        &:after{
+           -webkit-transform: scaleY(0.33);
+           transform: scaleY(0.33);
+        }      
+    }
+}
+.border-1px(@dir:around,@bcolor:#ddd) when (@dir=right), (@dir=left){
+    position: relative;
+    &:after{
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        @{dir}: 0;
+        border-@{dir}: 1px solid @bcolor;
+        content: ' ';    
+    }
+    @media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5){
+        &:after{
+           -webkit-transform: scaleX(0.7);
+           transform: scaleX(0.7);
+        }
+    }
+    @media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2){
+        &:after{
+           -webkit-transform: scaleX(0.5);
+           transform: scaleX(0.5);
+        }      
+    }
+    @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3){
+        &:after{
+           -webkit-transform: scaleX(0.33);
+           transform: scaleX(0.33);
         }      
     }
 }
